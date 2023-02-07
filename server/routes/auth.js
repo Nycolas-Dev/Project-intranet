@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 
-//CREATEALL
+//CREATEALL FOR INITIATE PROJECT
 router.post("/createall", createAllUser);
 
 export default router;

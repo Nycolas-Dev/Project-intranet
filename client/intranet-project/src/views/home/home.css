@@ -1,0 +1,13 @@
+.btn-home{
+    background: linear-gradient(to bottom, #f76e6e, #ef4446, #ec4893);
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 30px;
+    padding: 15px 20px;
+    font-weight: 700;
+}
+
+.hp{
+    font-size: 22px;
+    font-weight: 300;
+}

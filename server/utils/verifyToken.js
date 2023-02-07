@@ -31,9 +31,10 @@ export const verifyUser = (req, res, next) => {
 // Verify the token and if user is admin
 
 export const verifyAdmin = (req, res, next) => {
+  console.log("verifyAdmin");
     if (req.user.isAdmin) {
       next();
     } else {
-      return next(createError(403, "You are not authorized!"));
+      return next(createError(403, "You are not an administrator !"));
     }
 };
