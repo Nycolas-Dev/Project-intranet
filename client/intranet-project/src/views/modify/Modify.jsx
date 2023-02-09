@@ -9,19 +9,20 @@ import { useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from 'axios';
 import { AuthContext } from "../../context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 
-const Modify = (props) => {  
-    const { user, dispatch } = useContext(AuthContext);
-    const location = useLocation();
-    const [formData, setFormData] =  location.state ? useState(location.state.user) : useState(user);
-
+const Modify = () => {  
+  const { user, dispatch } = useContext(AuthContext);
+  const location = useLocation();
+  const [formData, setFormData] =  location.state ? useState(location.state.user) : useState(user);
+  const navigate = useNavigate();
   const theme = createTheme();
 
   const handleSubmit = async (data) => {
-    console.log(data);
     const res = await axios.put(`http://localhost:8000/api/users/${data._id}`, data, { withCredentials: true });
     if(!location.state){dispatch({ type: "LOGIN_SUCCESS", payload: data });};
+    navigate('/list')
     console.log(res);
   };
 
@@ -40,7 +41,7 @@ const Modify = (props) => {
         >
 
           <Typography component="h1" variant="h5">
-            Ajouter un utilisateur
+            Modifier profil
           </Typography>
           <Form onSubmit={handleSubmit} formData={formData}/>
         </Box>

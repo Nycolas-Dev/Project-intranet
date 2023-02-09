@@ -52,9 +52,10 @@ export default function SignIn() {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("http://localhost:8000/api/auth/login", credentials, { withCredentials: true });
-      console.log(res.data.isAdmin);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-        navigate("/list");
+      const birthdate = new Date(res.data.details.birthdate);
+      console.log(res.data.details.birthdate);
+      dispatch({ type: "LOGIN_SUCCESS", payload: { ...res.data.details, birthdate: birthdate.toISOString().substring(0, 10)} });
+        navigate("/");
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response });
     }

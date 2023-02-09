@@ -6,25 +6,24 @@ import Navbar from "../../components/Navigation.jsx";
 import Form from "../../components/Form.jsx";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 
 const Create = () => {  
   const theme = createTheme();
+  const navigate = useNavigate();
 
   const handleSubmit = (data) => {
-    console.log(data);
-    // Faire ce que vous voulez avec les données du formulaire ici
+    console.log("submit", data);
+    try {
+       axios.post("http://localhost:8000/api/auth/register",
+        data, { withCredentials: true });
+        navigate('/list');
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-  // };
 
   return (
     <ThemeProvider theme={theme}>

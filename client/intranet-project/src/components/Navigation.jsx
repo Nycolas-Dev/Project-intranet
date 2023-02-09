@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import LanIcon from "@mui/icons-material/Lan";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext.jsx";
 
@@ -17,11 +17,6 @@ const Navigation = () => {
     window.location.assign("/list");
   };
 
-  // Navigate to modify form
-  const handleCreate = () => {
-    navigate("/create");
-  };
-
   // Use AuthContext to logout
   const handleClick = () => {
     dispatch({ type: "LOGOUT" });
@@ -31,6 +26,11 @@ const Navigation = () => {
   // Navigate to login page
   const handleToLogin = () => {
     navigate("/login");
+  };
+
+  // Navigate to modify form
+  const handleCreate = () => {
+    navigate("/create");
   };
 
   return (
@@ -48,27 +48,35 @@ const Navigation = () => {
           </Link>
 
           {user ? (
-            <div  style={{ marginLeft: "auto" }}>
-              <Button
-                color="inherit"
-               
-                onClick={handleRedirect}
-              >
+            <div style={{ marginLeft: "auto", display: "flex" }}>
+              <Link to="/modify">
+                <img
+                  src={user.photo}
+                  alt=""
+                  style={{ borderRadius: 30, width: 45, marginRight: 10 }}
+                />
+              </Link>
+              <Button color="inherit" onClick={handleRedirect}>
                 <FormatListBulletedIcon /> Liste
               </Button>
-              {user.isAdmin ? (<Button
-                color="inherit"
-               
-                onClick={handleCreate}
-              >
-                <PersonIcon /> Ajouter
-              </Button>) : ''}
+              {user.isAdmin ? (
+                <Button color="inherit" onClick={handleCreate}>
+                  <PersonIcon /> Ajouter
+                </Button>
+              ) : (
+                ""
+              )}
+
               <Button color="inherit" onClick={handleClick}>
                 Déconnexion
               </Button>
             </div>
           ) : (
-            <Button color="inherit" onClick={handleToLogin} style={{ marginLeft: "auto" }}>
+            <Button
+              color="inherit"
+              onClick={handleToLogin}
+              style={{ marginLeft: "auto" }}
+            >
               Connexion
             </Button>
           )}

@@ -13,15 +13,8 @@ export default function MediaCard() {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [dateString, setDateString] = useState(null);
-
-  const navigate = useNavigate();
+  
   const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    if(!user){
-      navigate("/login")
-    }
-  }, []);
 
   const getCookie = (name) => {
     const cookie = document.cookie
@@ -101,11 +94,11 @@ export default function MediaCard() {
                 <Typography component="div">
                   {selectedUser.city}, {selectedUser.country}
                 </Typography>
-                <Link variant="button" component="div">
+                <Link to={`mailto:${selectedUser.email}`} target="_blank">
                   {selectedUser.email}
-                </Link>{" "}
+                </Link>
                 <br />
-                <Link variant="button" component="div">
+                <Link to={`tel:${selectedUser.phone}`} target="_blank">
                   {selectedUser.phone}
                 </Link>
                 <Typography component="div">
