@@ -52,7 +52,7 @@ export default function SignIn() {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("http://localhost:8000/api/auth/login", credentials, { withCredentials: true });
-      console.log(res);
+      console.log(res.data.isAdmin);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
         navigate("/list");
     } catch (err) {

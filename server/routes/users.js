@@ -13,12 +13,12 @@ const router = express.Router();
 router.put("/:id", verifyToken, verifyUser, updateUser);
 
 //DELETE
-router.delete("/:id", verifyToken, verifyUser, deleteUser);
+router.delete("/:id", verifyToken, verifyAdmin, deleteUser);
 
 //GET
-router.get("/:id", verifyToken, verifyUser, getUser);
+router.get("/:id", verifyToken, verifyAdmin, getUser);
 
 //GET ALL
-router.get("/", verifyToken, verifyAdmin, getAllUser);
+router.get("/", verifyToken, getAllUser);
 
 export default router;

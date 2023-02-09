@@ -1,0 +1,58 @@
+.searchDiv {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  label {
+    margin-right: 10px;
+  }
+  
+  input {
+    height: 30px;
+    width: 250px;
+  }
+  select {
+    height: 30px;
+    width: 150px;
+  }
+  
+  .category {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 11px!important;
+    color: white;
+    padding: 3px 7px;
+    font-weight: bold!important;
+  }
+  
+  .blue{
+      background: lightskyblue;
+  }
+  
+  .purple{
+      background: rgb(197, 54, 197);
+  }
+  
+  .green{
+      background: rgb(143, 228, 16);
+  }
+  
+  .btn-admin{
+      background: linear-gradient(to bottom, #f76e6e, #ef4446, #ec4893)!important;
+      color: #fff!important;
+      margin: 5px 2px!important;
+      font-size: 12px!important;
+  }
+  
+  .loc{
+      color: gray;
+      font-size: 17px!important;
+  }
+  
+  .rose{
+      color: #ec4893;
+      text-decoration: underline;
+  }
