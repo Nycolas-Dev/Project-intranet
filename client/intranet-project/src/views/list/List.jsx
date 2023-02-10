@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "./list.css";
+import { maxWidth } from "@mui/system";
 
 
 const List = () => {
@@ -52,10 +53,6 @@ const List = () => {
       setUsers(formattedData);
     });
   }, []);
-
-  if (!users.length) {
-    return <div>Loading...</div>;
-  }
 
   const filteredData = users.filter((user) => {
     if (city === "Nom") {

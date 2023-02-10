@@ -52,11 +52,20 @@ const Home = () => {
       </p>
       <h2>Avez-vous dit bonjour à :</h2>
       <Navbar />
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          margin: "50px 0 30px 0",
+          justifyContent: "center",
+        }}
+      >
       {user ? (
       <CardComponent index={user._id} user={user} handleDeleteParent={handleDelete}/>
       ) : (
         <div>Loading...</div>
       )}
+      </div>
       <button className="btn-home" onClick={handleClick}>
         Dire bonjour à quelqu'un d'autre
       </button>
