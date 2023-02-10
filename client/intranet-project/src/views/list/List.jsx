@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
+
 import "./list.css";
 
 import axios from "axios";
@@ -34,7 +35,14 @@ const List = () => {
     setCategory(event.target.value);
   };
 
-  const getCookie = (name) => {
+
+ useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, []);
+
+const getCookie = (name) => {
     const cookie = document.cookie
       .split(";")
       .find((c) => c.trim().startsWith(name + "="));
@@ -58,7 +66,6 @@ const List = () => {
         return {
           ...user,
           birthdate: birthdate.toISOString().substring(0, 10),
-         
         };
       });
       setUsers(formattedData);
@@ -80,7 +87,7 @@ const List = () => {
     const ageInMilliseconds = today - bd;
     const ageInYears = ageInMilliseconds / 1000 / 60 / 60 / 24 / 365.25;
     const roundedAge = Math.floor(ageInYears);
-    return roundedAge
+    return roundedAge;
   };
 
   if (!users.length) {
@@ -107,19 +114,15 @@ const List = () => {
 
   // Navigate to modify form
   const handleModify = (user) => {
-    navigate("/modify", { state: { user }});
- };
-
-  // Navigate to modify form
-  const handleDelete = async (id) => {
-    await axios.delete(
-      `http://localhost:8000/api/users/${id}`,
-      config,
-      { withCredentials: true }
-    );
-    window.location.reload();
+    navigate("/modify", { state: { user } });
   };
 
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:8000/api/users/${id}`, config, {
+      withCredentials: true,
+    });
+    setUsers(users.filter((user) => user._id !== id));
+  };
 
   return (
     <div
@@ -170,22 +173,22 @@ const List = () => {
             style={{ position: "relative" }}
           >
             <Grid container>
-              <Grid item xs={5} style={{maxWidth: 180}}>
+              <Grid item xs={5} style={{ maxWidth: 180 }}>
                 <CardMedia
                   sx={{ height: 200, maxWidth: 180 }}
                   image={item.photo}
                   title="Owen Lopez"
-                  
                 />
               </Grid>
-              <Grid item xs={6} style={{ textAlign: "left" }}>
+              <Grid item xs={7} style={{ textAlign: "left" }}>
                 <CardContent>
                   <Typography
                     variant="h6"
                     component="div"
                     style={{ fontWeight: "bold", fontSize: 18 }}
                   >
-                    {item.firstname} {item.lastname} ({displayAge(item.birthdate)})
+                    {item.firstname} {item.lastname} (
+                    {displayAge(item.birthdate)})
                   </Typography>
 
                   {item.category === "Marketing" ? (
@@ -220,11 +223,11 @@ const List = () => {
                   <Typography component="div" className="loc">
                     {item.city}, {item.country}
                   </Typography>
-                  <Link to={`mailto:${item.email}`} className="rose" target="_blank">
+                  <Link to={`mailto:${item.email}`} className="rose">
                     {item.email}
                   </Link>
                   <br />
-                  <Link to={`tel:${item.phone}`} className="rose" target="_blank">
+                  <Link to={`tel:${item.phone}`} className="rose">
                     {item.phone}
                   </Link>
                   <Typography component="div" className="loc">
@@ -234,14 +237,14 @@ const List = () => {
                     <div>
                       <Button
                         color="inherit"
-                        onClick={(e) => handleModify(item)}
+                        onClick={() => handleModify(item)}
                         className="btn-admin"
                       >
                         Éditer
                       </Button>
                       <Button
                         color="inherit"
-                        onClick={(e) => handleDelete(item._id)}
+                        onClick={() => handleDelete(item._id)}
                         className="btn-admin"
                       >
                         Supprimer
