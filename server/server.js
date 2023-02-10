@@ -45,6 +45,9 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.use("/api/auth", authRoute);
+app.use("/api/users", usersRoute);
+
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Sommething went wrong";
@@ -55,9 +58,6 @@ app.use((err, req, res, next) => {
     stack: err.stack,
   });
 });
-
-app.use("/api/auth", authRoute);
-app.use("/api/users", usersRoute);
 
 app.listen(port, () => {
     connect();
