@@ -46,6 +46,19 @@ export const getUser = async (req,res,next)=>{
   }
 }
 
+//Get random user
+
+export const getRandomUser = async (req,res,next)=>{
+  try {
+    const users = await User.find();
+    const randomIndex = Math.floor(Math.random() * users.length);
+    const user = users[randomIndex];
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
 //Get all user
 
 export const getAllUser = async (req,res,next)=>{

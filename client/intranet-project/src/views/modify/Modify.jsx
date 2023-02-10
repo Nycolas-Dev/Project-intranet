@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 const Modify = () => {  
   const { user, dispatch } = useContext(AuthContext);
   const location = useLocation();
-  const [formData, setFormData] =  location.state ? useState(location.state.user) : useState(user);
+  const [formData, setFormData] =  location.state ? useState(location.state.item) : useState(user);
   const navigate = useNavigate();
   const theme = createTheme();
 

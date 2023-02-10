@@ -3,6 +3,7 @@ import {
   updateUser,
   deleteUser,
   getUser,
+  getRandomUser,
   getAllUser,
 } from "../controllers/user.js";
 import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
@@ -15,8 +16,11 @@ router.put("/:id", verifyToken, verifyUser, updateUser);
 //DELETE
 router.delete("/:id", verifyToken, verifyAdmin, deleteUser);
 
+//GET RANDOM
+router.get("/random", verifyToken, getRandomUser);
+
 //GET
-router.get("/:id", verifyToken, verifyAdmin, getUser);
+router.get("/:id", verifyToken, getUser);
 
 //GET ALL
 router.get("/", verifyToken, getAllUser);
