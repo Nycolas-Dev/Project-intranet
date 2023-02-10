@@ -42,6 +42,7 @@ export default function SignIn() {
   });
 
   const { loading, error, dispatch } = useContext(AuthContext);
+  console.log(error);
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -53,7 +54,6 @@ export default function SignIn() {
     try {
       const res = await axios.post("http://localhost:8000/api/auth/login", credentials, { withCredentials: true });
       const birthdate = new Date(res.data.details.birthdate);
-      console.log(res.data.details.birthdate);
       dispatch({ type: "LOGIN_SUCCESS", payload: { ...res.data.details, birthdate: birthdate.toISOString().substring(0, 10)} });
         navigate("/");
     } catch (err) {
@@ -109,6 +109,7 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {error && <span style={{ color: "red" }}>{error.message}</span>}
             <Button
               type="submit"
               disabled={loading}

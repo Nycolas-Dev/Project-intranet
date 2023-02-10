@@ -106,7 +106,7 @@ const List = () => {
         }}
       >
         {filteredData.map((item) => (
-          <CardComponent user={item} index={item._id} handleDeleteParent={handleDelete}/>
+          <CardComponent user={item} key={item._id} handleDeleteParent={handleDelete}/>
         ))}
       </div>
     </div>

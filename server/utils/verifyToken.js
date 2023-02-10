@@ -18,7 +18,7 @@ export const verifyToken = (req, res, next) => {
 
 };
 
-// Verify the token and the user
+// Verify if the user is admin or if he modify himself data
 
 export const verifyUser = (req, res, next) => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
@@ -28,10 +28,9 @@ export const verifyUser = (req, res, next) => {
     };
 };
 
-// Verify the token and if user is admin
+// Verify if user is admin
 
 export const verifyAdmin = (req, res, next) => {
-  console.log("verifyAdmin");
     if (req.user.isAdmin) {
       next();
     } else {
