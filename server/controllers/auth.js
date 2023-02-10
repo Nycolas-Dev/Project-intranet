@@ -3,28 +3,28 @@ import bcrypt from "bcryptjs";
 import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
-export const createAllUser = async (req, res, next) => {
-  try {
-    const users = req.body;
-    const newUsers = [];
+// export const createAllUser = async (req, res, next) => {
+//   try {
+//     const users = req.body;
+//     const newUsers = [];
 
-    for (const user of users) {
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(user.password, salt);
+//     for (const user of users) {
+//       const salt = bcrypt.genSaltSync(10);
+//       const hash = bcrypt.hashSync(user.password, salt);
 
-      const newUser = new User({
-        ...user,
-        password: hash,
-      });
-      newUsers.push(newUser);
-    }
+//       const newUser = new User({
+//         ...user,
+//         password: hash,
+//       });
+//       newUsers.push(newUser);
+//     }
 
-    await User.insertMany(newUsers);
-    res.status(200).send("Users have been created.");
-  } catch (err) {
-    next(err);
-  }
-};
+//     await User.insertMany(newUsers);
+//     res.status(200).send("Users have been created.");
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 
 // Create an user
 
