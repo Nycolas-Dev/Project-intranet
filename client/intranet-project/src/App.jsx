@@ -28,6 +28,8 @@ function App() {
         <Route path="/modify" element={user === null ? (<Navigate replace to="/login" />) : (<Modify />)}/>
         <Route path="/list" element={user === null ? (<Navigate replace to="/login" />) : (<List />)}/>
 
+        {/* <Route path="/test" element={user.isAdmin === true ? (<Create />) : (<Create />)}/> */}
+
         <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>

@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "./list.css";
-import { maxWidth } from "@mui/system";
-
 
 const List = () => {
   const [users, setUsers] = useState([]);
@@ -25,26 +23,8 @@ const List = () => {
     setCategory(event.target.value);
   };
 
-
-  const getCookie = (name) => {
-    const cookie = document.cookie
-      .split(";")
-      .find((c) => c.trim().startsWith(name + "="));
-    if (!cookie) return undefined;
-    return cookie.split("=")[1];
-  };
-
-  const access_token = getCookie("access_token");
-
-  const config = {
-    headers: {
-      access_token: `${access_token}`,
-    },
-    withCredentials: true,
-  };
-
   useEffect(() => {
-    axios.get("http://localhost:8000/api/users", config).then(({ data }) => {
+    axios.get("http://localhost:8000/api/users", {withCredentials: true}).then(({ data }) => {
       const formattedData = data.map((user) => {
         return {
           ...user

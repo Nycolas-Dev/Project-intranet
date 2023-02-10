@@ -99,6 +99,7 @@ const Form = (props) => {
             <InputLabel id="genderlabel">Civilité</InputLabel>
             <Select
               labelId="genderlabel"
+              required
               id="gender"
               name="gender"
               label="Civilité"
@@ -165,6 +166,7 @@ const Form = (props) => {
               id="category"
               name="category"
               label="Categorie"
+              required
               value={formData.category}
               onChange={handleChange}
             >

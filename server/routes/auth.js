@@ -1,10 +1,11 @@
 import express from "express";
 import { createAllUser, login, register } from "../controllers/auth.js";
+import { verifyAdmin, verifyToken } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 
-router.post("/register", register);
+router.post("/register", verifyToken, verifyAdmin, register);
 router.post("/login", login);
 
 //CREATEALL FOR INITIATE PROJECT

@@ -45,27 +45,6 @@ const CardComponent = (props) => {
     return roundedAge;
   };
 
-  const getCookie = (name) => {
-    const cookie = document.cookie
-      .split(";")
-      .find((c) => c.trim().startsWith(name + "="));
-    if (!cookie) return undefined;
-    return cookie.split("=")[1];
-  };
-
-  const access_token = getCookie("access_token");
-
-  const config = {
-    headers: {
-      access_token: `${access_token}`,
-    },
-    withCredentials: true,
-  };
-
-  // if (!users.length) {
-  //   return <div>Loading...</div>;
-  // }
-
   // Navigate to modify form
   const handleModify = (item) => {
     const birthdate = new Date(item.birthdate).toISOString().substring(0, 10);
@@ -74,7 +53,7 @@ const CardComponent = (props) => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:8000/api/users/${id}`, config);
+    await axios.delete(`http://localhost:8000/api/users/${id}`, {withCredentials: true});
     handleDeleteParent(id);
   };
 
